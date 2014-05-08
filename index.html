@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <!-- telling the mobile device to display the page without any zooming -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Rocket-Matter-Builder</title>
+
+    <link href="js/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="css/app.css" rel="stylesheet">
+    <style>
+        * {
+            color:#333;
+        }
+        #container {
+            width: 1024px;
+            height: 1768px;
+            margin-right: auto;
+            margin-left: auto;
+            background-color: white;
+            position: relative;
+            overflow-x: hidden;
+            overflow-y: hidden;
+        }
+        #canvasContainer {
+            width: 1024px;
+            height: 487px;      /* height for iPhone + scrollbar = 484 + 3*/
+            overflow-x: auto;
+            overflow-y: auto;
+            background-color: red;
+        }
+        #canvas {
+            position: relative;
+            width: 1600px;  /* width of iPhone * 2 */
+            height: 470px;  /* height for iPhone = 467, rounded up  */
+            background-color: lightgrey;
+        }
+        #palette {
+            width: 1024px;
+            height: 350px;  /* 284px = 768 - (height for iPhone + scrollbar) */
+            background-color: lightblue;
+            padding: 10px;
+        }
+        .paletteLabel {
+            text-align:right;
+            width: 60px;
+            margin-right:5px;
+        }
+        .textInput {
+            width: 100px;
+        }
+        #blockSize {
+        }
+        #saveToDiskButton {
+            width: 101px;
+            height: 34px;
+        }
+        #loadWorldButton {
+            width: 101px;
+            height: 34px;
+            margin-left: 30px;
+        }
+        #fileInputElement {
+            visibility: hidden;
+            display: none;
+        }
+        #resetSumDXButton, #resetSumDYButton {
+            margin-left: 10px;
+        }
+        #createBlockButton  {
+            margin-left: 30px;
+        }
+        #saveToDiskButton {
+            padding-left: 30px;
+        }
+        .paletteSection {
+            border: 1px solid white;
+            padding: 5px;
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="container">
+
+        <div id="canvasContainer">
+            <div id="canvas"></div>
+        </div>
+
+        <div id="palette">
+            <div class="paletteSection">
+                <div class="row">
+                    <div class="col-xs-12" >
+                        <h4><strong>create block at </strong><span id="blockSize">left:20, top:30, width:200, height:50</span></h4>
+                    </div>
+                </div>
+                <div class="row">
+
+                    <div class="col-xs-12">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <label class="paletteLabel">x:</label><input class="textInput" id="inputX" type="text" value="0"/>
+                                <label class="paletteLabel">dx:</label><input class="textInput" id="inputDX" type="text" value=""/>
+                                <label class="paletteLabel">sum dx:</label><input class="textInput" id="sumDX" type="text" value="0" disabled="true" />
+                                <button id="resetSumDXButton" type="button" class="btn btn-primary btn-xs">reset sum dx</button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <label class="paletteLabel">y:</label><input class="textInput" id="inputY" type="text" value="0"/>
+                                <label class="paletteLabel">dy:</label><input class="textInput" id="inputDY" type="text" value=""/>
+                                <label class="paletteLabel">sum dy:</label><input class="textInput" id="sumDY" type="text" value="0" disabled="true" />
+                                <button id="resetSumDYButton" type="button" class="btn btn-primary btn-xs">reset sum dy</button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <label class="paletteLabel">width:</label><input class="textInput" id="inputW" type="text" value="0"/>
+                                <label class="paletteLabel">height:</label><input class="textInput" id="inputH" type="text" value="0"/>
+                                <label class="paletteLabel">colour:</label><input class="textInput" id="inputColour" type="color" value="#ff0000"/>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <button id="createBlockButton" type="button" class="btn btn-primary">create block</button>
+                                    <label class="paletteLabel" for="staticCheckbox">static:</label><input type="checkbox" id="staticCheckbox" />
+                                </div>
+                                <div class="col-xs-6">
+                                    <button id="deleteBlockButton" type="button" class="btn btn-primary">delete block</button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="paletteSection">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <h4><strong>world</strong></h4>
+                    </div>
+
+                    <div class="col-xs-8" id="world">
+                        <div class="row">
+                            <!-- uses "downloadify", a third party utility which uses an swf file to download data -->
+                            <!-- <button id="saveWorldButton" type="button" class="btn btn-primary">save world</button> -->
+
+                            <span id="saveToDiskButton"></span>
+                            <span id="worldProps">
+                                <label for="worldBounds">bounds:</label><input type="checkbox" id="worldBounds" checked/>
+                                <label class="paletteLabel">width:</label><input class="textInput" id="inputWorldW" type="text" value="0"/>
+                                <label class="paletteLabel">height:</label><input class="textInput" id="inputWorldH" type="text" value="0"/>
+                            </span>
+                        </div>
+
+                        <div class="row">
+
+                            <!-- These two elements work together to create a Bootstrap styled "choose file" button -->
+                           <button id="loadWorldButton" type="button" class="btn btn-primary">load world</button>
+                           <input type="file" id="fileInputElement">
+                        </div>
+                    </div>
+
+                 </div>
+            </div>
+    </div> <!-- eo container -->
+
+    <!-- JavaScript at the bottom for fast page loading -->
+    <script src="js/lib/jquery/jquery.js"></script>
+    <script src="js/lib/jquery/jquery-ui.js"></script>
+    <script src="js/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="js/lib/underscore.js"></script>
+
+    <script src="js/EventDispatcher.js"></script>
+    <script src="js/Keys.js"></script>
+    <script src="js/FileIO.js"></script>
+
+    <script src="js/Canvas.js"></script>
+    <script src="js/Palette.js"></script>
+    <script src="js/Cursor.js"></script>
+    <script src="js/Item.js"></script>
+    <script src="js/WorldManager.js"></script>
+
+    <script src="js/App.js"></script>
+    <script src="js/Control.js"></script>
+
+    <script type="text/javascript" src="js/lib/Downloadify-master/js/swfobject.js"></script>
+    <script type="text/javascript" src="js/lib/Downloadify-master/js/downloadify.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            var app1 = new App();
+        });
+    </script>
+
+</body>
+
+</html>
