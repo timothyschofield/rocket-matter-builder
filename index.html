@@ -9,76 +9,9 @@
 
     <link href="js/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" media="screen">
     <link href="css/app.css" rel="stylesheet">
+    <link href="css/main.css" rel="stylesheet">
+    <link href="css/palette.css" rel="stylesheet">
     <style>
-        * {
-            color:#333;
-        }
-        #container {
-            width: 1024px;
-            height: 1768px;
-            margin-right: auto;
-            margin-left: auto;
-            background-color: white;
-            position: relative;
-            overflow-x: hidden;
-            overflow-y: hidden;
-        }
-        #canvasContainer {
-            width: 1024px;
-            height: 487px;      /* height for iPhone + scrollbar = 484 + 3*/
-            overflow-x: auto;
-            overflow-y: auto;
-            background-color: red;
-        }
-        #canvas {
-            position: relative;
-            width: 1600px;  /* width of iPhone * 2 */
-            height: 470px;  /* height for iPhone = 467, rounded up  */
-            background-color: lightgrey;
-        }
-        #palette {
-            width: 1024px;
-            height: 350px;  /* 284px = 768 - (height for iPhone + scrollbar) */
-            background-color: lightblue;
-            padding: 10px;
-        }
-        .paletteLabel {
-            text-align:right;
-            width: 60px;
-            margin-right:5px;
-        }
-        .textInput {
-            width: 100px;
-        }
-        #blockSize {
-        }
-        #saveToDiskButton {
-            width: 101px;
-            height: 34px;
-        }
-        #loadWorldButton {
-            width: 101px;
-            height: 34px;
-            margin-left: 30px;
-        }
-        #fileInputElement {
-            visibility: hidden;
-            display: none;
-        }
-        #resetSumDXButton, #resetSumDYButton {
-            margin-left: 10px;
-        }
-        #createBlockButton  {
-            margin-left: 30px;
-        }
-        #saveToDiskButton {
-            padding-left: 30px;
-        }
-        .paletteSection {
-            border: 1px solid white;
-            padding: 5px;
-            margin: 5px;
-        }
     </style>
 </head>
 <body>

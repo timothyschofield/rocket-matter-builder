@@ -1,0 +1,43 @@
+#palette {
+    width: 1024px;
+    height: 350px;  /* 284px = 768 - (height for iPhone + scrollbar) */
+    background-color: lightblue;
+    padding: 10px;
+}
+.paletteLabel {
+    text-align:right;
+    width: 60px;
+    margin-right:5px;
+}
+.textInput {
+    width: 100px;
+}
+#blockSize {
+}
+#saveToDiskButton {
+    width: 101px;
+    height: 34px;
+}
+#loadWorldButton {
+    width: 101px;
+    height: 34px;
+    margin-left: 30px;
+}
+#fileInputElement {
+    visibility: hidden;
+    display: none;
+}
+#resetSumDXButton, #resetSumDYButton {
+    margin-left: 10px;
+}
+#createBlockButton  {
+    margin-left: 30px;
+}
+#saveToDiskButton {
+    padding-left: 30px;
+}
+.paletteSection {
+    border: 1px solid white;
+    padding: 5px;
+    margin: 5px;
+}

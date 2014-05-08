@@ -1,0 +1,26 @@
+* {
+    color:#333;
+}
+#container {
+    width: 1024px;
+    height: 1768px;
+    margin-right: auto;
+    margin-left: auto;
+    background-color: white;
+    position: relative;
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+#canvasContainer {
+    width: 1024px;
+    height: 487px;      /* height for iPhone + scrollbar = 484 + 3*/
+    overflow-x: auto;
+    overflow-y: auto;
+    background-color: red;
+}
+#canvas {
+    position: relative;
+    width: 1600px;  /* width of iPhone * 2 */
+    height: 470px;  /* height for iPhone = 467, rounded up  */
+    background-color: lightgrey;
+}
